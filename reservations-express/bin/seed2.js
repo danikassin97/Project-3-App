@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/reservations");
+mongoose.connect("mongodb://localhost/reservations-express");
 
 
 const Tables = require("../models/tables-model.js");

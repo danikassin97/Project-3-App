@@ -3,6 +3,7 @@ const router = express.Router();
 const Clubs = require('../models/clubs-model');
 const UserModel = require('../models/user-model');
 const Tables = require('../models/tables-model');
+const ReservationsModel = require('../models/reservations-model');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
@@ -134,6 +135,44 @@ router.post('/tables', checkAdmin, (req, res, next) => {
     res.status(200).json(theTable);
   });
 });
+
+
+// RESERVATIONS
+
+router.get('/reservations', (req, res, next) => {
+  ReservationsModel.find((err, reservationsList) => {
+    if (err) {
+      res.json(err);
+      return;
+    }
+
+    res.json(reservationsList);
+    console.log('reservations');
+  });
+});
+
+router.post('/reservations', (req, res, next) => {
+  const TheReservation = new ReservationsModel({
+    bottles: req.body.bottles,
+    total: req.body.total
+    });
+  TheReservation.save((err) => {
+    if (err && TheReservation.errors === undefined) {
+      res.status(500).json({ message: 'reservation save went to shit' });
+      return;
+    }
+
+    if (err && TheReservation.errors) {
+      res.status(400).json({
+        tableMinError: TheReservation.errors.tableMinimum,
+        bottlesError: TheReservation.errors.bottles,
+      });
+      return;
+    }
+    res.status(200).json(TheReservation);
+  });
+});
+
 
 
 module.exports = router;

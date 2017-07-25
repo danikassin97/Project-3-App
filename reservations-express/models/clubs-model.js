@@ -27,11 +27,16 @@ const clubsSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  tableMinimum: {
+    type: Number,
+    required: true
+  },
+  bottles: {
+    type: Array,
+    required: true
+  }
   // ------------
-  tablesRes: [{ type: Schema.Types.ObjectId, ref: 'Tables'}],
-
-
-
+  // tablesRes: { type: Schema.Types.ObjectId, ref: 'Tables'},
 },
 {
   timestamps: true

@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/reservations-express');
 
+const Tables = require('../models/tables-model.js');
 
-const Clubs = require("../models/clubs-model.js");
 
 
 var bottle1 = {
@@ -89,30 +89,29 @@ const bottlesArray = [
 ];
 
 
-const clubsArray = [
+const tablesArray = [
   {
-    clubName: "Daniel",
-    clubImage: 'n',
-    clubAddress: '100 Warrenton St',
-    clubMusic: 'Latino',
-    clubDescription: "It's fun",
-    clubFloorplan: 'h',
     tableMinimum: 700,
-    bottles: bottlesArray
+    bottles: bottlesArray,
   }
 ];
 
-Clubs.create(
-  clubsArray,               // first argument --> array of product info objects
 
-  (err, clubResults) => {      // second argument --> callback
+Tables.create(
+  tablesArray,               // first argument --> array of product info objects
+
+  (err, tableResults) => {      // second argument --> callback
     if (err) {
       console.log("problem");
       return;
     }
-      clubResults.forEach((oneClub) => {
-        console.log("new product: " + oneClub.clubName);
+      tableResults.forEach((oneTable) => {
+        console.log("new table: " + oneTable.tableMinimum);
       });
     }
 
 );
+
+// tablesArray.forEach((bottle) => {
+//  bottle.save(myTransactionSchema);
+//   });
