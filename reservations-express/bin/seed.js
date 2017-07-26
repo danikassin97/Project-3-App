@@ -7,11 +7,11 @@ const User = require("../models/user-model.js");
 
 const userArray = [
   {
-    firstName: "Daniel",
-    lastName: "Daniel",
-    username: "Daniel",
-    email: "Daniel",
-    password: "Daniel",
+    fullName: "daniel",
+    username: "daniel",
+    email: "daniel@daniel.daniel",
+    // phoneNum: 4534,
+    password: "daniel",
   }
 ];
 

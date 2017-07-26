@@ -13,7 +13,7 @@ const reservationsSchema = new mongoose.Schema({
     required: true
   },
 
-  clubRes: { type: Schema.Types.ObjectId, ref: 'Clubs'},
+  clubRes: { type: Schema.Types, ref: 'Clubs'},
 
   // tableRes: { type: Schema.Types.ObjectId, ref: 'Tables'},
 

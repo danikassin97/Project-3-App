@@ -91,12 +91,12 @@ const bottlesArray = [
 
 const clubsArray = [
   {
-    clubName: "Daniel",
-    clubImage: 'n',
+    clubName: "Icon",
+    clubImage: './assets/images/icon-main-pic.png',
     clubAddress: '100 Warrenton St',
     clubMusic: 'Latino',
     clubDescription: "It's fun",
-    clubFloorplan: 'h',
+    clubFloorplan: './assets/images/icon-floorplan.png',
     tableMinimum: 700,
     bottles: bottlesArray
   }

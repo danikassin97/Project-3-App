@@ -140,38 +140,83 @@ router.post('/tables', checkAdmin, (req, res, next) => {
 // RESERVATIONS
 
 router.get('/reservations', (req, res, next) => {
-  ReservationsModel.find((err, reservationsList) => {
-    if (err) {
-      res.json(err);
+  console.log(req.user);
+  if (req.user === undefined ) {
+console.log("all reservations");
+    ReservationsModel.find((err, reservationsList) => {
+      if (err) {
+        res.json(err);
+        return;
+      }
+
+      res.json(reservationsList);
+      // console.log('reservations');
+    });
+
       return;
     }
+    else {
+      ReservationsModel.find({userRes: req.user._id}, (err, reservationsList) => {
+        if (err) {
+          res.json(err);
+          return;
+        }
 
-    res.json(reservationsList);
-    console.log('reservations');
-  });
+        res.json(reservationsList);
+        // console.log(req.user)
+        console.log('reservations of user');
+      }).sort('-date');
+    }
+
 });
 
 router.post('/reservations', (req, res, next) => {
-  const TheReservation = new ReservationsModel({
-    bottles: req.body.bottles,
-    total: req.body.total
-    });
-  TheReservation.save((err) => {
-    if (err && TheReservation.errors === undefined) {
-      res.status(500).json({ message: 'reservation save went to shit' });
-      return;
-    }
 
-    if (err && TheReservation.errors) {
-      res.status(400).json({
-        tableMinError: TheReservation.errors.tableMinimum,
-        bottlesError: TheReservation.errors.bottles,
+
+  console.log(req.user);
+  // Clubs.findById(req.body, (err, club) => {
+  //   if (err) {
+  //     res.json(err);
+  //     return;
+  //   }
+    const TheReservation = new ReservationsModel({
+      bottles: req.body.bottles,
+      total: req.body.total,
+      userRes: req.user._id,
+      clubRes: req.body.clubInfo
       });
-      return;
-    }
-    res.status(200).json(TheReservation);
-  });
+
+      TheReservation.save((err) => {
+        if (err && TheReservation.errors === undefined) {
+          res.status(500).json({ message: 'reservation save went to shit' });
+          return;
+        }
+
+        if (err && TheReservation.errors) {
+          res.status(400).json({
+            tableMinError: TheReservation.errors.tableMinimum,
+            bottlesError: TheReservation.errors.bottles,
+          });
+          return;
+        }
+        res.status(200).json(TheReservation);
+      });
+
+
 });
+
+
+// router.get('/reservations', (req, res, next) => {
+//   ReservationsModel.find({userRes: req.user._id}, (err, reservationsList) => {
+//     if (err) {
+//       res.json(err);
+//       return;
+//     }
+//
+//     res.json(reservationsList);
+//     console.log('reservations');
+//   });
+// });
 
 
 

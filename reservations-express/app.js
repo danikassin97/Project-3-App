@@ -66,6 +66,12 @@ app.use('/api', reservationsApi);
 const myAuthRoutes = require('./routes/auth-routes-api');
 app.use('/api', myAuthRoutes);
 
+// ----------------------------------------
+
+app.use((req, res, next) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');

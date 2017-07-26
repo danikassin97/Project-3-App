@@ -31,6 +31,7 @@ router.post('/signup', (req, res, next) => {
        const theUser = new UserModel({
          fullName: req.body.signupFullName,
          email: req.body.signupEmail,
+         phoneNum: req.body.signupNumber,
          username: req.body.signupUsername,
          encryptedPassword: scrambledPassword
        });
@@ -47,6 +48,7 @@ router.post('/signup', (req, res, next) => {
              return;
            }
          });
+         console.log('nice');
         theUser.encryptedPassword = undefined;
         res.status(200).json(theUser);
        });
@@ -66,6 +68,7 @@ router.post('/login', (req, res, next) => {
       }
       if (!theUser) {
       res.status(401).json(extraInfo);
+      console.log('what is this');
       return;
       }
       req.login(theUser, (err) => {

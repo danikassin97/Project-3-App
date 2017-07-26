@@ -34,9 +34,8 @@ const clubsSchema = new mongoose.Schema({
   bottles: {
     type: Array,
     required: true
-  }
-  // ------------
-  // tablesRes: { type: Schema.Types.ObjectId, ref: 'Tables'},
+  },
+  userRes: { type: Schema.Types.ObjectId, ref: 'UserModel'}
 },
 {
   timestamps: true
