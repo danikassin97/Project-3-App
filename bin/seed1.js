@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost/reservations-express');
+require('dotenv').config();
 
+mongoose.connect(process.env.MONGODB_URI);
 
 const Clubs = require("../models/clubs-model.js");
 
