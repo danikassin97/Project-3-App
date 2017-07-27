@@ -140,7 +140,7 @@ router.post('/tables', checkAdmin, (req, res, next) => {
 // RESERVATIONS
 
 router.get('/reservations', (req, res, next) => {
-  console.log(req.user);
+  // console.log(req.user);
   if (req.user === undefined ) {
 console.log("all reservations");
     ReservationsModel.find((err, reservationsList) => {
@@ -173,7 +173,7 @@ console.log("all reservations");
 router.post('/reservations', (req, res, next) => {
 
 
-  console.log(req.user);
+  // console.log(req.user);
   // Clubs.findById(req.body, (err, club) => {
   //   if (err) {
   //     res.json(err);
@@ -218,6 +218,30 @@ router.post('/reservations', (req, res, next) => {
 //   });
 // });
 
+router.delete(`/reservations/:id`, (req, res) => {
+           // Takes in the passed in parameter as provider name
+
+           ReservationsModel.remove(req.params.id, (err, theListing)=>{
+             if (err) {
+                 res.json(err);
+                 return;
+               }
+           });
+        });
+
+router.patch('/clubs', (req, res, next) => {
+  console.log(req.body.id, req.body.tableAmount);
+  console.log('patching');
+    Clubs.findByIdAndUpdate(req.body.id, {$set: {tableAmount: req.body.tableAmount} },
+      (err, response) => {
+        if (err) {
+          console.log('bad');
+          return;
+        }
+        return res.status(200).json(response);
+
+    });
+});
 
 
 module.exports = router;

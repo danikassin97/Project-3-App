@@ -98,7 +98,8 @@ const clubsArray = [
     clubDescription: "It's fun",
     clubFloorplan: './assets/images/icon-floorplan.png',
     tableMinimum: 700,
-    bottles: bottlesArray
+    bottles: bottlesArray,
+    tableAmount: 3
   }
 ];
 
