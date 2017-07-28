@@ -226,6 +226,7 @@ router.delete(`/reservations/:id`, (req, res) => {
                  res.json(err);
                  return;
                }
+               return res.status(200).json(theListing);
            });
         });
 
